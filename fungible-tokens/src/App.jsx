@@ -1,216 +1,308 @@
-// import React ,{useState}from 'react'
-// import Web3 from 'web3'
+import React ,{useState}from 'react'
+import Web3 from 'web3'
 
-
-// function App() {
-//   const [amount, setAmount] = useState(0)
-//   const [account, setAccount] = useState('')
-//   const [balance, setBalance] = useState(0)
-
-//   const web3 = new Web3(new Web3.providers.HttpProvider("https://sepolia.infura.io/v3/4e3461ff9766436abbbad5e8334dc6d2"))
-
-//   const abi = [
-//     {
-//       "inputs": [
-//         {
-//           "internalType": "address",
-//           "name": "recipient",
-//           "type": "address"
-//         },
-//         {
-//           "internalType": "uint256",
-//           "name": "amount",
-//           "type": "uint256"
-//         }
-//       ],
-//       "name": "mint",
-//       "outputs": [],
-//       "stateMutability": "nonpayable",
-//       "type": "function"
-//     },
-//     {
-//       "inputs": [
-//         {
-//           "internalType": "address",
-//           "name": "recipient",
-//           "type": "address"
-//         },
-//         {
-//           "internalType": "uint256",
-//           "name": "amount",
-//           "type": "uint256"
-//         }
-//       ],
-//       "name": "transfer",
-//       "outputs": [
-//         {
-//           "internalType": "bool",
-//           "name": "",
-//           "type": "bool"
-//         }
-//       ],
-//       "stateMutability": "nonpayable",
-//       "type": "function"
-//     },
-//     {
-//       "inputs": [
-//         {
-//           "internalType": "uint256",
-//           "name": "initialSupply",
-//           "type": "uint256"
-//         }
-//       ],
-//       "stateMutability": "nonpayable",
-//       "type": "constructor"
-//     },
-//     {
-//       "inputs": [
-//         {
-//           "internalType": "address",
-//           "name": "account",
-//           "type": "address"
-//         }
-//       ],
-//       "name": "balanceOf",
-//       "outputs": [
-//         {
-//           "internalType": "uint256",
-//           "name": "",
-//           "type": "uint256"
-//         }
-//       ],
-//       "stateMutability": "view",
-//       "type": "function"
-//     },
-//     {
-//       "inputs": [],
-//       "name": "totalSupply",
-//       "outputs": [
-//         {
-//           "internalType": "uint256",
-//           "name": "",
-//           "type": "uint256"
-//         }
-//       ],
-//       "stateMutability": "view",
-//       "type": "function"
-//     }
-//   ]
-
-//   const address = "0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8"
-
-//   const contract = new web3.eth.Contract(abi, address)
-//       function mint(){
-//         // contract.methods.mint(account,amount).send({from:account})
-//         contract.methods.mint(account,amount).call()
-//       }
-
-//       function transfer(){
-//         contract.methods.transfer(account,amount).send({from:account})
-//       }
-
-//       function balanceOf(){
-//         contract.methods.balanceOf(account).call().then(res=>setBalance(res))
-//       }
-//   return (
-//     <div>
-//       <h1>Fungible Tokens</h1>
-//       <input type="text" placeholder="Account" onChange={(e)=>setAccount(e.target.value)}/>
-//       <input type="text" placeholder="Amount" onChange={(e)=>setAmount(e.target.value)}/>
-//       <button onClick={mint}>Mint</button>
-//       <button onClick={transfer}>Transfer</button>
-//       <button onClick={balanceOf}>BalanceOf</button>
-//       <h2>Balance: {balance}</h2>
-//     </div>
-//   )
-// }
-
-// export default App
-import React, { useState } from 'react';
-import Web3 from 'web3';
 
 function App() {
-  const [amount, setAmount] = useState('');
-  const [account, setAccount] = useState('');
-  const [balance, setBalance] = useState('0');
+  const [amount, setAmount] = useState(0)
+  const [account, setAccount] = useState('')
+  const [balance, setBalance] = useState(0)
 
-  const web3 = new Web3('https://sepolia.infura.io/v3/4e3461ff9766436abbbad5e8334dc6d2');
+  const web3 = new Web3(new Web3.providers.HttpProvider("https://sepolia.infura.io/v3/4e3461ff9766436abbbad5e8334dc6d2"))
 
   const abi = [
-    // ... (your existing ABI)
-  ];
-
-  const address = "0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8";
-  const contract = new web3.eth.Contract(abi, address);
-
-  async function mint() {
-    try {
-      await contract.methods.mint(account, amount).send({ from: account });
-      await balanceOf();
-    } catch (error) {
-      console.error('Minting failed:', error);
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "mint",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "initialSupply",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
     }
-  }
+  ]
 
-  async function transfer() {
-    try {
-      await contract.methods.transfer(account, amount).send({ from: account });
-      await balanceOf();
-    } catch (error) {
-      console.error('Transfer failed:', error);
-    }
-  }
+  const address = "0x2b68aef78710b474bd1523c1a057bc2b8ad60ed0"
 
-  async function balanceOf() {
-    try {
-      const result = await contract.methods.balanceOf(account).call();
-      setBalance(result);
-    } catch (error) {
-      console.error('Balance check failed:', error);
-    }
-  }
+  const contract = new web3.eth.Contract(abi, address)
+      function mint(){
+        // contract.methods.mint(account,amount).send({from:account})
+        contract.methods.mint(account,amount).call()
+      }
 
-  // return (
+      function transfer(){
+        contract.methods.transfer(account,amount).send({from:account})
+      }
 
-  //   <div>
-  //     <h1>Fungible Tokens</h1>
-  //     <input type="text" placeholder="Account" onChange={(e) => setAccount(e.target.value)} /> <br />
-  //     <input type="text" placeholder="Amount" onChange={(e) => setAmount(e.target.value)} /> <br />
-  //     <button onClick={mint}>Mint</button>
-  //     <button onClick={transfer}>Transfer</button>
-  //     <button onClick={balanceOf}>BalanceOf</button>
-  //     <h2>Balance: {balance}</h2>
-  //   </div>
-  // );
-
+      function balanceOf(){
+        contract.methods.balanceOf(account).call().then(res=>setBalance(res))
+      }
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
-       <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-      <h1 className="text-4xl font-bold mb-6">Fungible Tokens</h1>
-      <div className="flex flex-col w-full max-w-md">
-        <input
-          type="text"
-          placeholder="Account Address"
-          className="mb-4 p-2 border rounded-lg"
-          onChange={(e) => setAccount(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Amount"
-          className="mb-4 p-2 border rounded-lg"
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <div className="flex justify-between mb-4">
-          <button onClick={mint} className="px-4 py-2 bg-blue-500 text-white rounded-lg">Mint</button>
-          <button onClick={transfer} className="px-4 py-2 bg-green-500 text-white rounded-lg">Transfer</button>
-          <button onClick={balanceOf} className="px-4 py-2 bg-gray-500 text-white rounded-lg">Balance Of</button>
-        </div>
-      </div>
-      <h2 className="text-2xl mt-4">Balance: {balance}</h2>
-      </form>
-    </div>
-  );
-}
+    <div>
+      <h1>Fungible Tokens</h1>
+       <input type="text" placeholder="Account" onChange={(e)=>setAccount(e.target.value)}/>
+       <input type="text" placeholder="Amount" onChange={(e)=>setAmount(e.target.value)}/>
+       <button onClick={mint}>Mint</button>
+       <button onClick={transfer}>Transfer</button>
+       <button onClick={balanceOf}>BalanceOf</button>
+       <h2>Balance: {balance}</h2>
+     </div>
+   )
+ }
+
+ export default App
 
 
-export default App;
+// import { useEffect, useState } from "react";
+// import Web3 from "web3";
+// import "./App.css";
+
+// function App() {
+//   const [account, setAccount] = useState("");
+//   const [contract, setContract] = useState(null);
+//   const [balance, setBalance] = useState("0");
+//   const [amount, setAmount] = useState("");
+//   const [recipient, setRecipient] = useState("");
+
+//   useEffect(() => {
+//     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+
+//     const abi = [
+//       {
+//         "inputs": [
+//           {
+//             "internalType": "address",
+//             "name": "recipient",
+//             "type": "address"
+//           },
+//           {
+//             "internalType": "uint256",
+//             "name": "amount",
+//             "type": "uint256"
+//           }
+//         ],
+//         "name": "mint",
+//         "outputs": [],
+//         "stateMutability": "nonpayable",
+//         "type": "function"
+//       },
+//       {
+//         "inputs": [
+//           {
+//             "internalType": "address",
+//             "name": "recipient",
+//             "type": "address"
+//           },
+//           {
+//             "internalType": "uint256",
+//             "name": "amount",
+//             "type": "uint256"
+//           }
+//         ],
+//         "name": "transfer",
+//         "outputs": [
+//           {
+//             "internalType": "bool",
+//             "name": "",
+//             "type": "bool"
+//           }
+//         ],
+//         "stateMutability": "nonpayable",
+//         "type": "function"
+//       },
+//       {
+//         "inputs": [
+//           {
+//             "internalType": "uint256",
+//             "name": "initialSupply",
+//             "type": "uint256"
+//           }
+//         ],
+//         "stateMutability": "nonpayable",
+//         "type": "constructor"
+//       },
+//       {
+//         "inputs": [
+//           {
+//             "internalType": "address",
+//             "name": "account",
+//             "type": "address"
+//           }
+//         ],
+//         "name": "balanceOf",
+//         "outputs": [
+//           {
+//             "internalType": "uint256",
+//             "name": "",
+//             "type": "uint256"
+//           }
+//         ],
+//         "stateMutability": "view",
+//         "type": "function"
+//       },
+//       {
+//         "inputs": [],
+//         "name": "totalSupply",
+//         "outputs": [
+//           {
+//             "internalType": "uint256",
+//             "name": "",
+//             "type": "uint256"
+//           }
+//         ],
+//         "stateMutability": "view",
+//         "type": "function"
+//       }
+//     ];
+
+//     const address = "0x707dD469E0d8fC09Ace4f91Eccb0D6871FC986FA";
+
+//     async function initializeContract() {
+//       const accounts = await web3.eth.requestAccounts();
+//       setAccount(accounts[0]);
+      
+//       const contractInstance = new web3.eth.Contract(abi, address);
+//       setContract(contractInstance);
+//     }
+
+//     initializeContract();
+//   }, []);
+
+//   useEffect(() => {
+//     if (contract && account) {
+//       loadBalance();
+//     }
+//   }, [contract, account]);
+
+//   async function loadBalance() {
+//     if (contract && account) {
+//       try {
+//         const result = await contract.methods.balanceOf(account).call();
+//         setBalance(result);
+//       } catch (error) {
+//         console.error("Balance check failed:", error);
+//       }
+//     }
+//   }
+
+//   async function mint() {
+//     if (contract && account) {
+//       try {
+//         await contract.methods.mint(recipient, amount).send({ from: account });
+//         await loadBalance();
+//       } catch (error) {
+//         console.error("Minting failed:", error);
+//       }
+//     }
+//   }
+
+//   async function transfer() {
+//     if (contract && account) {
+//       try {
+//         await contract.methods.transfer(recipient, amount).send({ from: account });
+//         await loadBalance();
+//       } catch (error) {
+//         console.error("Transfer failed:", error);
+//       }
+//     }
+//   }
+
+//   return (
+//     <div className="h-screen w-full flex flex-wrap items-center justify-center bg-slate-400 rounded-lg p-5">
+//       <header className="App-header">
+//         Fungible Token Interface
+//         <p>Your Account: {account}</p>
+//         <p>Your Balance: {balance}</p>
+//         <input
+//           type="text"
+//           placeholder="Recipient Address"
+//           onChange={(e) => setRecipient(e.target.value)}
+//         />
+//         <input
+//           type="text"
+//           placeholder="Amount"
+//           onChange={(e) => setAmount(e.target.value)}
+//         />
+//         <button onClick={mint}>Mint</button>
+//         <button onClick={transfer}>Transfer</button>
+//       </header>
+//     </div>
+//   );
+// }
+
+// export default App;
