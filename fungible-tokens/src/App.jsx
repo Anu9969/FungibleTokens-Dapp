@@ -97,12 +97,18 @@ function App() {
     }
   ]
 
-  const address = "0x2b68aef78710b474bd1523c1a057bc2b8ad60ed0"
+  const address = "0x5c2b3fe7df448424b0c0d1a320da7b28114b6343"
 
   const contract = new web3.eth.Contract(abi, address)
+
+    console.log(contract)
       function mint(){
         // contract.methods.mint(account,amount).send({from:account})
-        contract.methods.mint(account,amount).call()
+        contract.methods.mint(account,amount).call().then((e)=>{
+          console.log(e);
+        }).catch((e)=>{
+          console.log(e);
+        })
       }
 
       function transfer(){
@@ -113,14 +119,17 @@ function App() {
         contract.methods.balanceOf(account).call().then(res=>setBalance(res))
       }
   return (
-    <div>
-      <h1>Fungible Tokens</h1>
-       <input type="text" placeholder="Account" onChange={(e)=>setAccount(e.target.value)}/>
-       <input type="text" placeholder="Amount" onChange={(e)=>setAmount(e.target.value)}/>
-       <button onClick={mint}>Mint</button>
-       <button onClick={transfer}>Transfer</button>
-       <button onClick={balanceOf}>BalanceOf</button>
+    <div className='h-screen w-screen flex flex-wrap bg-slate-400 rounded-lg shadow-md items-center justify-center m-8'>
+      <div className='flex flex-col items-center justify-center space-x-4 bg-stone-100 rounded-lg p-7'>
+      <h1 className='font-bold py-9 text-xl'>Fungible Tokens</h1>
+       <input className='p-2 border-spacing-2 bg-gray-500 rounded-md ' type="text" placeholder="Account" onChange={(e)=>setAccount(e.target.value)}/> <br />
+       <input className='p-2 border-spacing-2 bg-gray-500 rounded-md ' type="text" placeholder="Amount" onChange={(e)=>setAmount(e.target.value)}/>  <br />
+       <button className="bg-blue-500 rounded-md p-2 shadow-md w-3/4" onClick={mint}>Mint</button> <br />
+       <button className="bg-blue-500 rounded-md p-2 shadow-md w-3/4" onClick={transfer}>Transfer</button> <br />
+       <button className="bg-blue-500 rounded-md p-2 shadow-md w-3/4" onClick={balanceOf}>BalanceOf</button> <br />
        <h2>Balance: {balance}</h2>
+      </div>
+  
      </div>
    )
  }
